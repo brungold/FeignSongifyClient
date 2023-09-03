@@ -1,7 +1,6 @@
 package com.feignsongifyclient.songify;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(value = "songify-server-client")
-@Service
 public interface SongifyProxy {
     // GET http://localhost:8080/songs
     @GetMapping("/songs")

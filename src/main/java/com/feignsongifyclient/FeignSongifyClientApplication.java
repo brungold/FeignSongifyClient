@@ -32,11 +32,7 @@ public class FeignSongifyClientApplication {
     public void run() {
         try {
             SongifyResponse response = songifyClient.fetchAllSongs();
-            Map<Integer, SongifyRequest> songs = response.songs();
-            songs.forEach(
-                    (key, value) ->
-                            log.info("Song ID: {}, Name: {}, Artist: {}", key, value.name(), value.artist())
-            );
+            displayAllSongs(response.songs());
         } catch (FeignException.FeignClientException feignException) {
             log.error("client exception: " + feignException.status());
         } catch (FeignException.FeignServerException feignException) {
@@ -47,6 +43,14 @@ public class FeignSongifyClientApplication {
             System.out.println(feignException.getMessage());
             System.out.println(feignException.status());
         }
+
+    }
+
+    private void displayAllSongs(Map<Integer, SongifyRequest> songs) {
+        songs.forEach(
+                (key, value) ->
+                        log.info("Song ID: {}, Name: {}, Artist: {}", key, value.name(), value.artist())
+        );
     }
 }
 

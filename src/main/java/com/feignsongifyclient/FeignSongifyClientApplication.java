@@ -1,6 +1,7 @@
 package com.feignsongifyclient;
 
 import com.feignsongifyclient.songify.SongifyProxy;
+import com.feignsongifyclient.songify.SongifyResponse;
 import feign.FeignException;
 import feign.RetryableException;
 import lombok.extern.log4j.Log4j2;
@@ -26,12 +27,8 @@ public class FeignSongifyClientApplication {
     @EventListener(FeignSongifyClientApplication.class)
     public void run() {
         try {
-//            ItunesResponse response = itunesClient.makeSearchRequest("shawnmendes", 5);
-            log.info(songifyClient.fetchAllSongs());
-            songifyClient.deleteByPathVariableId("0");
-//            log.info(sampleShawnMendesServerClient.addSong(new SampleShawnMendesRequest("In my Blood")));
-//            log.info(sampleShawnMendesServerClient.addSong(new SampleShawnMendesRequest("Stitches")));
-
+            SongifyResponse response = songifyClient.fetchAllSongs();
+            log.info(response);
         } catch (FeignException.FeignClientException feignException) {
             log.error("client exception: " + feignException.status());
         } catch (FeignException.FeignServerException feignException) {

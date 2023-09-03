@@ -31,8 +31,13 @@ public class FeignSongifyClientApplication {
     @EventListener(ApplicationStartedEvent.class)
     public void run() {
         try {
-            SongifyResponse response = songifyClient.fetchAllSongs();
-            displayAllSongs(response.songs());
+//            SongifyResponse response = songifyClient.fetchAllSongs();
+//            displayAllSongs(response.songs());
+            SongifyRequest request = new SongifyRequest("Parostatek", "Karol Krawczyk");
+            SongifyResponse response = songifyClient.addSong(request);
+            log.info("Response: {}", request.songName() + " " + request.artist());
+//            SongifyResponse responseSecond = songifyClient.fetchAllSongs();
+//            displayAllSongs(responseSecond.songs());
         } catch (FeignException.FeignClientException feignException) {
             log.error("client exception: " + feignException.status());
         } catch (FeignException.FeignServerException feignException) {
@@ -49,7 +54,7 @@ public class FeignSongifyClientApplication {
     private void displayAllSongs(Map<Integer, SongifyRequest> songs) {
         songs.forEach(
                 (key, value) ->
-                        log.info("Song ID: {}, Name: {}, Artist: {}", key, value.name(), value.artist())
+                        log.info("Song ID: {}, Name: {}, Artist: {}", key, value.songName(), value.artist())
         );
     }
 }

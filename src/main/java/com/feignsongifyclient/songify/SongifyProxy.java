@@ -11,7 +11,7 @@ public interface SongifyProxy {
 
 //do ogarnięcia
     @GetMapping("/songs/{id}")
-    SongifyRequest getSongById(@PathVariable Integer id);
+    GetSongResponseDto getSongById(@PathVariable Integer id);
 
     @PostMapping("/songs")
     SongifyResponse addSong(@RequestBody SongifyRequest request);
@@ -22,6 +22,7 @@ public interface SongifyProxy {
     @PutMapping("/songs/{songId}")
     SongifyRequest putByPathVariableId(@PathVariable Integer songId, @RequestBody SongifyRequest request);
 
+    // do ogarnięcia
     @PatchMapping("/songs/{songId}")
     SongifyRequest patchByPathVariableID(@PathVariable Integer songId, @RequestBody SongifyRequest request);
 }

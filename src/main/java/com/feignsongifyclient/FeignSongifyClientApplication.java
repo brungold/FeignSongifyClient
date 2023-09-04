@@ -1,5 +1,6 @@
 package com.feignsongifyclient;
 
+import com.feignsongifyclient.songify.GetSongResponseDto;
 import com.feignsongifyclient.songify.SongifyProxy;
 import com.feignsongifyclient.songify.SongifyRequest;
 import com.feignsongifyclient.songify.SongifyResponse;
@@ -36,8 +37,9 @@ public class FeignSongifyClientApplication {
 //            displayAllSongs(response.songs());
 
             // GET by ID
-//            SongifyRequest request = songifyClient.getSongById(1);
-//            log.info("Your song " + request.songName() + " by: " + request.artist());
+            GetSongResponseDto responseDto = songifyClient.getSongById(1);
+            SongifyRequest request = new SongifyRequest(responseDto.song().name(), responseDto.song().artist());
+            log.info("Your song " + request.songName() + " by: " + request.artist());
 
             //POST
 //            SongifyRequest request = new SongifyRequest("Parostatek", "Karol Krawczyk");
@@ -50,8 +52,8 @@ public class FeignSongifyClientApplication {
             //PUT
 //          songifyClient.putByPathVariableId(1, new SongifyRequest("Al Bundy", "Song"));
 
-            //PATCH
-            songifyClient.patchByPathVariableID(1, new SongifyRequest("Trolololo","jimi"));
+            //PATCH------ nie udaje się
+//            songifyClient.patchByPathVariableID(1, new SongifyRequest("Trolololo","jimi"));
 
         } catch (FeignException.FeignClientException feignException) {
             log.error("client exception: " + feignException.status());

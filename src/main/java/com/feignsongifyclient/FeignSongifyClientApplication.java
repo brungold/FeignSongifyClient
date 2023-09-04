@@ -1,8 +1,7 @@
 package com.feignsongifyclient;
 
-import com.feignsongifyclient.songify.GetSongRequestById;
 import com.feignsongifyclient.songify.SongifyProxy;
-import com.feignsongifyclient.songify.SongifyRequest;
+import com.feignsongifyclient.songify.request.SongifyRequest;
 import feign.FeignException;
 import feign.RetryableException;
 import lombok.extern.log4j.Log4j2;
@@ -36,9 +35,9 @@ public class FeignSongifyClientApplication {
 //            displayAllSongs(response.songs());
 
             // GET by ID
-            GetSongRequestById responseDto = songifyClient.getSongById(1);
-            SongifyRequest request = new SongifyRequest(responseDto.song().name(), responseDto.song().artist());
-            log.info("Your song " + request.songName() + " by: " + request.artist());
+//            GetSongRequestById responseDto = songifyClient.getSongById(1);
+//            SongifyRequest request = new SongifyRequest(responseDto.song().name(), responseDto.song().artist());
+//            log.info("Your song " + request.songName() + " by: " + request.artist());
 
             //POST
 //            SongifyRequest request = new SongifyRequest("Parostatek", "Karol Krawczyk");
@@ -52,7 +51,7 @@ public class FeignSongifyClientApplication {
 //          songifyClient.putByPathVariableId(1, new SongifyRequest("Al Bundy", "Song"));
 
             //PATCH------ nie udaje się
-//            songifyClient.patchByPathVariableID(1, new SongifyRequest("Trolololo","jimi"));
+            songifyClient.patchByPathVariableID(1, new SongifyRequest("Trolololo", "jimi"));
 
         } catch (FeignException.FeignClientException feignException) {
             log.error("client exception: " + feignException.status());

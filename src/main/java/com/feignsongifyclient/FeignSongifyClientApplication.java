@@ -1,9 +1,8 @@
 package com.feignsongifyclient;
 
-import com.feignsongifyclient.songify.GetSongResponseDto;
+import com.feignsongifyclient.songify.GetSongRequestById;
 import com.feignsongifyclient.songify.SongifyProxy;
 import com.feignsongifyclient.songify.SongifyRequest;
-import com.feignsongifyclient.songify.SongifyResponse;
 import feign.FeignException;
 import feign.RetryableException;
 import lombok.extern.log4j.Log4j2;
@@ -37,7 +36,7 @@ public class FeignSongifyClientApplication {
 //            displayAllSongs(response.songs());
 
             // GET by ID
-            GetSongResponseDto responseDto = songifyClient.getSongById(1);
+            GetSongRequestById responseDto = songifyClient.getSongById(1);
             SongifyRequest request = new SongifyRequest(responseDto.song().name(), responseDto.song().artist());
             log.info("Your song " + request.songName() + " by: " + request.artist());
 

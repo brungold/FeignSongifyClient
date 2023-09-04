@@ -1,12 +1,7 @@
 package com.feignsongifyclient.songify;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 @FeignClient(value = "songify-server-client")
 public interface SongifyProxy {
@@ -14,10 +9,19 @@ public interface SongifyProxy {
     @GetMapping("/songs")
     SongifyResponse fetchAllSongs();
 
+//do ogarnięcia
+    @GetMapping("/songs/{id}")
+    SongifyRequest getSongById(@PathVariable Integer id);
+
     @PostMapping("/songs")
     SongifyResponse addSong(@RequestBody SongifyRequest request);
 
     @DeleteMapping("/songs/{songId}")
-    void deleteByPathVariableId(@PathVariable String songId);
+    void deleteByPathVariableId(@PathVariable Integer songId);
 
+    @PutMapping("/songs/{songId}")
+    SongifyRequest putByPathVariableId(@PathVariable Integer songId, @RequestBody SongifyRequest request);
+
+    @PatchMapping("/songs/{songId}")
+    SongifyRequest patchByPathVariableID(@PathVariable Integer songId, @RequestBody SongifyRequest request);
 }

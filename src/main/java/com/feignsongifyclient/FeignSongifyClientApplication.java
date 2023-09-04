@@ -31,13 +31,28 @@ public class FeignSongifyClientApplication {
     @EventListener(ApplicationStartedEvent.class)
     public void run() {
         try {
+            //GET
 //            SongifyResponse response = songifyClient.fetchAllSongs();
 //            displayAllSongs(response.songs());
-            SongifyRequest request = new SongifyRequest("Parostatek", "Karol Krawczyk");
-            SongifyResponse response = songifyClient.addSong(request);
-            log.info("Response: {}", request.songName() + " " + request.artist());
-//            SongifyResponse responseSecond = songifyClient.fetchAllSongs();
-//            displayAllSongs(responseSecond.songs());
+
+            // GET by ID
+//            SongifyRequest request = songifyClient.getSongById(1);
+//            log.info("Your song " + request.songName() + " by: " + request.artist());
+
+            //POST
+//            SongifyRequest request = new SongifyRequest("Parostatek", "Karol Krawczyk");
+//            SongifyResponse response = songifyClient.addSong(request);
+//            log.info("Response: {}", request.songName() + " " + request.artist())
+
+            //DELETE
+//            songifyClient.deleteByPathVariableId(1);
+
+            //PUT
+//          songifyClient.putByPathVariableId(1, new SongifyRequest("Al Bundy", "Song"));
+
+            //PATCH
+            songifyClient.patchByPathVariableID(1, new SongifyRequest("Trolololo","jimi"));
+
         } catch (FeignException.FeignClientException feignException) {
             log.error("client exception: " + feignException.status());
         } catch (FeignException.FeignServerException feignException) {

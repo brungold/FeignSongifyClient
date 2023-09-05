@@ -2,6 +2,7 @@ package com.feignsongifyclient.songify;
 
 import com.feignsongifyclient.songify.request.GetSongRequestById;
 import com.feignsongifyclient.songify.request.SongifyRequest;
+import com.feignsongifyclient.songify.response.GetSongResponseById;
 import com.feignsongifyclient.songify.response.SongifyResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,6 @@ public interface SongifyProxy {
     @GetMapping("/songs")
     SongifyResponse fetchAllSongs();
 
-//do ogarnięcia
     @GetMapping("/songs/{id}")
     GetSongRequestById getSongById(@PathVariable Integer id);
 
@@ -25,7 +25,6 @@ public interface SongifyProxy {
     @PutMapping("/songs/{songId}")
     SongifyRequest putByPathVariableId(@PathVariable Integer songId, @RequestBody SongifyRequest request);
 
-    // do ogarnięcia
     @PatchMapping(value ="/songs/{songId}", consumes = "application/json")
     SongifyRequest patchByPathVariableID(@PathVariable Integer songId, @RequestBody SongifyRequest request);
 }

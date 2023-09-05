@@ -3,6 +3,7 @@ package com.feignsongifyclient;
 import com.feignsongifyclient.songify.SongifyProxy;
 import com.feignsongifyclient.songify.request.GetSongRequestById;
 import com.feignsongifyclient.songify.request.SongifyRequest;
+import com.feignsongifyclient.songify.response.GetSongResponseById;
 import com.feignsongifyclient.songify.response.SongifyResponse;
 import feign.FeignException;
 import feign.RetryableException;
@@ -32,12 +33,12 @@ public class FeignSongifyClientApplication {
     @EventListener(ApplicationStartedEvent.class)
     public void run() {
         try {
-            //GET
+            //GET all songs
             SongifyResponse response = songifyClient.fetchAllSongs();
             displayAllSongs(response.songs());
 
 //            // GET by ID
-//            GetSongRequestById responseDto = songifyClient.getSongById(1);
+//            GetSongRequestById responseDto = songifyClient.getSongById(2);
 //            SongifyRequest request = new SongifyRequest(responseDto.song().name(), responseDto.song().artist());
 //            log.info("Your song " + request.songName() + " by: " + request.artist());
 
@@ -48,14 +49,15 @@ public class FeignSongifyClientApplication {
 
             //DELETE
 //            songifyClient.deleteByPathVariableId(1);
+//            log.info("You deleted song");
 
             //PUT
-//            songifyClient.putByPathVariableId(1, new SongifyRequest("Al Bundy", "Song"));
+//            songifyClient.putByPathVariableId(2, new SongifyRequest("Al Bundy", "Song"));
+//            log.info("you have updated the data");
 
-
-            //PATCH------ nie udaje się
+            //PATCH
 //            SongifyRequest partiallyUpdateSong = new SongifyRequest("Trolololo","Jan");
-//            songifyClient.patchByPathVariableID(1, partiallyUpdateSong);
+//            songifyClient.patchByPathVariableID(4, partiallyUpdateSong);
 //            log.info("Partially updated record: songName: " + partiallyUpdateSong.artist() + " and " + "artist: " + partiallyUpdateSong.artist());
 
         } catch (FeignException.FeignClientException feignException) {
@@ -71,11 +73,26 @@ public class FeignSongifyClientApplication {
 
     }
 
-    private void displayAllSongs(Map<Integer, SongifyRequest> songs) {
+    private void displayAllSongs(Map<Integer, GetSongResponseById> songs) {
         songs.forEach(
                 (key, value) ->
                         log.info("Song ID: {}, Name: {}, Artist: {}", key, value.name(), value.artist())
         );
+    }
+    private void displayAllSongsAsOneBlock(Map<Integer, GetSongResponseById> songs) {
+        StringBuilder songList = new StringBuilder("Song List:\n");
+
+        songs.forEach((key, value) ->
+                songList.append("Song ID: ")
+                        .append(key)
+                        .append(", Name: ")
+                        .append(value.name())
+                        .append(", Artist: ")
+                        .append(value.artist())
+                        .append("\n")
+        );
+
+        log.info(songList.toString());
     }
 }
 

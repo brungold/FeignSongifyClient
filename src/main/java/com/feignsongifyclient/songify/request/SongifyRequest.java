@@ -1,4 +1,4 @@
 package com.feignsongifyclient.songify.request;
 
-public record SongifyRequest(String songName, String artist) {
+public record SongifyRequest(String name, String artist) {
 }

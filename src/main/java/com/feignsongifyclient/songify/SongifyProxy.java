@@ -26,6 +26,6 @@ public interface SongifyProxy {
     SongifyRequest putByPathVariableId(@PathVariable Integer songId, @RequestBody SongifyRequest request);
 
     // do ogarnięcia
-    @PatchMapping("/songs/{songId}")
+    @PatchMapping(value ="/songs/{songId}", consumes = "application/json")
     SongifyRequest patchByPathVariableID(@PathVariable Integer songId, @RequestBody SongifyRequest request);
 }

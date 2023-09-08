@@ -35,17 +35,19 @@ public class FeignSongifyClientApplication {
         try {
             //GET all songs
 //            SongifyResponse response = songifyClient.fetchAllSongs();
+//            log.info(response);
 //            displayAllSongs(response.songs());
 
             // GET by ID
-//            GetSongRequestById responseDto = songifyClient.getSongById(2);
-//            SongifyRequest request = new SongifyRequest(responseDto.song().name(), responseDto.song().artist());
-//            log.info("Your song " + request.songName() + " by: " + request.artist());
+            GetSongRequestById responseDto = songifyClient.getSongById(2, "someId");
+            SongifyRequest request = new SongifyRequest(responseDto.song().name(), responseDto.song().artist());
+            log.info(request);
+            log.info("Your song " + request.songName() + " by: " + request.artist());
 
             //POST
-            SongifyRequest request = new SongifyRequest("Parostatek", "Karol Krawczyk");
-            SongifyResponse response = songifyClient.addSong(request);
-            log.info("New song posted : {}", request.songName() + " " + request.artist());
+//            SongifyRequest request = new SongifyRequest("Parostatek", "Karol Krawczyk");
+//            SongifyResponse response = songifyClient.addSong(request);
+//            log.info("New song posted : {}", request.songName() + " " + request.artist());
 
             //DELETE
 //            songifyClient.deleteByPathVariableId(1);

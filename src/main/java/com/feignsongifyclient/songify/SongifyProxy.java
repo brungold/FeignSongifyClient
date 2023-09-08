@@ -14,7 +14,7 @@ public interface SongifyProxy {
     SongifyResponse fetchAllSongs();
 
     @GetMapping("/songs/{id}")
-    GetSongRequestById getSongById(@PathVariable Integer id);
+    GetSongRequestById getSongById(@PathVariable Integer id, @RequestHeader String requestId);
 
     @PostMapping("/songs")
     SongifyResponse addSong(@RequestBody SongifyRequest request);
